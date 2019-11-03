@@ -1,0 +1,49 @@
+1. A customer has reached out to us that he cannot access our platform running on 45.33.22.50. Customer's complain is as follows:
+"Hello, It seems i cannot access http://45.33.22.50/test1"
+
+
+=== I . For both above questions what are the actions you will take to evaluate customers request ====
+
+1. First of all, I will evaluate the Service Impact that this issue is causing in order to confirm the urgency for this and have in mind the SLA, confirm on which enviroment are facing this issue (Production or Test).From the URL context it seems that is Test enviroment. 
+2. I will confirm what is the use or purpose for that particular URL. For Example if this URL is being used for consuming a Service by using API or it is a URL for a web Server. 
+3. I will quicly check on our side if the URL is available or not and check if there is an ongoing change (there is no odds if it is Business Hours).
+4. I will ask customer some questions to get further details. (Next Section)
+5. I will confirm if port 80 is the correct one. 
+6. Important. Customer statement is unclear. It may be a loging issue, because says "I cannot access"
+
+=== II. Include questions we may need to ask to get additional information to ensure the best customer support ===
+1. Ask them to share the way they are testing that confirms cannot access the platform.
+2. Ask them to share Incident Start time. 
+3. Ask them to confirm of the URL was whitelisted on their Firewall or Loadbalancer
+4. Ask them to confirm if NAT was done. 
+5. Ask them to execute Networking validations like curl command and ping to confirm if the URL is reachable. Confirm the Source IP
+root@ricardo-HP:/home/ricardo/Escritorio/giting/lab-sup# curl -lv http://45.33.22.50/test1 --connect-timeout 5
+*   Trying 45.33.22.50...
+* Connection timed out after 5001 milliseconds
+* Closing connection 0
+curl: (28) Connection timed out after 5001 milliseconds
+6. Confirm if there is no need to use https instead http that will requiered to interchange TLS certificates to access that URL. 
+
+
+=== III. Add an explanation why you ask each question (what do you expect to receive back ===
+All Questions here refer back to the last section 1:1
+
+1. Try to get evidence in the way they are checking. Get logs, Error, Sreenshots, any hint that will give us how to proceed
+2. Get more information about how the URL is being used in order to know what steps I will perform on our side (Next Section)
+3. Confirm if there are no actions that have not been completed on customer side, that they may are not aware of. 
+4. Confirm if NAT was done to allow whithin their network to reach our IP
+5. Execute some network commands to confirm if the IP is reacheable. 
+6. Confirm if they are using the correct URL and confirm there is not a typo. 
+
+=== IV. Additionaly you need to ssh to the machine and troubleshoot the above scenarios ===
+1. Confirm if nginx service is working properly.
+2. Confirm if there are connections established on our server (Need to confirm port). May be we can use netstat to confirm port
+3. If we get source IP we can perform a trace using tcpdump to get a pcap file and review it on wireshark.
+4. Confirm if the application is up and running (Confirm internal services or process are ok)
+5. Review Application logs to confirm possible errors.  
+
+
+
+
+
+

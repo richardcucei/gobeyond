@@ -1,4 +1,4 @@
-# Technical Support Engineer Assesment
+# Technical Support Engineer Assesment.
 ## Steps to Submit
 1. Create an ssh key on your machine if you do not have one
 1. Send us your ssh public key
